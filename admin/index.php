@@ -2,10 +2,12 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
+$info = '';
+
 include '../connectDB.php';
 
 function showPageTable ($link) {
-    $query = "SELECT id, title, url FROM pagesj";
+    $query = "SELECT id, title, url FROM pagesj WHERE url!='404'";
     $result = mysqli_query($link, $query) or die( mysqli_error($link) );
     //Преобразуем то, что отдала нам база в нормальный массив PHP $data:
     for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
@@ -32,13 +34,25 @@ function showPageTable ($link) {
 }
 
 function deletePage ($link, $id) {
-    $query = "DELETE FROM pagesj WHERE id='$id'";
-    $result = mysqli_query($link, $query) or die( mysqli_error($link) );
-    //Преобразуем то, что отдала нам база в нормальный массив PHP $data:
+    $query = "SELECT * FROM pagesj WHERE id='$id'";
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $data = mysqli_fetch_assoc($result);
+
+    if ($data) {
+        $query = "DELETE FROM pagesj WHERE id='$id'";
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+
+        if($result) return true;
+        else return false;
+
+    } else return true;
 }
 
 if (!empty($_GET['del'])) {
-    deletePage($link, $_GET['del']);
+    $isDelete = deletePage($link, $_GET['del']);
+
+    if ($isDelete) $info = "Успешно удаленно";
+    else $info =  "Ошибка удаления";
 }
 
 $content = showPageTable($link);
@@ -47,8 +61,8 @@ $title = 'admin main page';
 
 include 'layout.php';
 
-echo "<pre>";
+/*echo "<pre>";
 var_dump($_SERVER['REQUEST_URI']);
 //var_dump($del);
-echo "</pre>";
+echo "</pre>";*/
 

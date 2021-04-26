@@ -4,23 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="/style.css">
     <title><?= $title ?></title>
 </head>
 <body>
     <div id="wrapper">
         <header>
-            header
+            <?php include 'elems/header.php' ?>
         </header>
         <main>
-            <?php if($info) echo "<p>$info</p>"; ?>
-            <div>
-                <a href="add.php">Добавить страницу</a>
-            </div>
             <?= $content ?>
         </main>
         <footer>
-            footer
+            <?php include 'elems/footer.php' ?>
         </footer>
     </div>
 </body>
