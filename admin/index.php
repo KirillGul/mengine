@@ -12,6 +12,10 @@ if (isset($_SESSION['info'])) {
     $info = $_SESSION['info'];
 }
 
+/*if (isset($_GET['edit'])) {
+    header("Location: /admin/edit.php?id={$_GET['edit']}");
+}*/
+
 include '../connectDB.php';
 
 function showPageTable ($link) {
@@ -34,7 +38,7 @@ function showPageTable ($link) {
             <td>{$value['id']}</td>
             <td>{$value['title']}</td>
             <td>{$value['url']}</td>
-            <td><a href=\"\">edit</a></td>
+            <td><a href=\"edit.php?id={$value['id']}\">edit</a></td>
             <td><a href=\"?del={$value['id']}\">del</a></td>
             </tr>";
     }

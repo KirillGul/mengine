@@ -69,9 +69,9 @@ if (!empty($titlePOST) AND !empty($urlPOST)) {
 }
 
 $content = "<form method=\"POST\">
-title: <input name='title'$titleValue><br><br>
-url: <input name='url'$urlValue><br><br>
-text: <textarea name='text'>$textValue</textarea><br><br>
+title:<br><input name='title'$titleValue><br><br>
+url:<br><input name='url'$urlValue><br><br>
+text:<br><textarea name='text'>$textValue</textarea><br><br>
 <input type='submit'>
 </form>";
 
