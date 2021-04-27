@@ -1,8 +1,16 @@
 <?php
+session_start();
+
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
+$content = '';
+$title = 'admin main page';
+
 $info = '';
+if (isset($_SESSION['info'])) {
+    $info = $_SESSION['info'];
+}
 
 include '../connectDB.php';
 
@@ -51,13 +59,20 @@ function deletePage ($link, $id) {
 if (!empty($_GET['del'])) {
     $isDelete = deletePage($link, $_GET['del']);
 
-    if ($isDelete) $info = "Успешно удаленно";
-    else $info =  "Ошибка удаления";
+    if ($isDelete)
+        $info = [
+            'msg' => "Успешно удаленно",
+            'status' => 'success'
+        ];
+    else
+        $info = [
+            'msg' => "Ошибка удаления",
+            'status' => 'error'
+        ];
 }
 
-$content = showPageTable($link);
-
-$title = 'admin main page';
+$content = "<a href=\"add.php\">Добавить страницу</a>";
+$content .= showPageTable($link);
 
 include 'layout.php';
 
