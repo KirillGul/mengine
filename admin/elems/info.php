@@ -1,4 +1,10 @@
 <?php
-if (!empty($info)) {
-   echo "<p class=\"{$info['status']}\">{$info['msg']}</p>";
+//var_dump ($_SESSION);
+
+if (isset($_SESSION['info'])) {
+   $status = $_SESSION['info']['status'];
+   $msg = $_SESSION['info']['msg'];
+   echo "<p class=\"$status\">$msg</p>";
+
+   unset($_SESSION['info']);
 }

@@ -18,4 +18,3 @@ function creatLink ($elem) {
 foreach ($data as $elem) {
    echo creatLink($elem);
 }
-?>

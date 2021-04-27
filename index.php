@@ -1,8 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-
-include 'connectDB.php';
+include 'elems/init.php';
 
 if (isset($_GET['page'])) {
     $url = $_GET['page'];
@@ -27,8 +24,7 @@ if (!$page) {
 $title = $page['text'];
 $content = $page['text'];
 
-include 'layout.php';
-
+include 'elems/layout.php';
 
 echo "<a href=\"admin/\">Перейти в админку</a>";
 

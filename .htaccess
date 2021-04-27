@@ -1,0 +1,2 @@
+#включаем механизам преобразований URL (относиться к mod_rewrite)
+RewriteEngine On
