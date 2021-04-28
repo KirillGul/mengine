@@ -1,20 +1,20 @@
 <?php
 include 'elems/init.php';
 
-$uri = trim(preg_replace('#(\?.*)?#', '', $_SERVER['REQUEST_URI']), '/');
-
-if (empty($uri)) {
-    $uri = '/';
+if (isset($_GET['page'])) {
+    $url = $_GET['page'];
+} else {
+    $url = '/';
 }
 
-function query ($link, $uri) {
-    $query = "SELECT * FROM pagesj WHERE url='$uri'";
+function query ($link, $url) {
+    $query = "SELECT * FROM pagesj WHERE url='$url'";
     $result = mysqli_query($link, $query) or die( mysqli_error($link) );
     //Преобразуем то, что отдала нам база в нормальный массив PHP $data:
     return mysqli_fetch_assoc($result);
 }
 
-$page = query($link, $uri);
+$page = query($link, $url);
 
 if (!$page) {
     $page = query($link, '404');
@@ -32,3 +32,4 @@ echo "<a href=\"admin/\">Перейти в админку</a>";
 var_dump($_SERVER['REQUEST_URI']);
 //var_dump($url);
 echo "</pre>";*/
+

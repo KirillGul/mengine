@@ -1,6 +1,12 @@
 #включаем механизам преобразований URL (относиться к mod_rewrite)
 RewriteEngine On
-RewriteBase /
+#RewriteBase /
 
-RewriteCond %{REQUEST_URI} !^/index.php
-RewriteRule ^(.*?)/?$ index.php?page=$1
+#Вариант 1 (простой вариант - только для одноуровневого сайта)
+#RewriteCond %{REQUEST_URI} !^/assets/
+#RewriteCond %{REQUEST_URI} !^/index.php
+#RewriteRule ^(.*?)/?$ index.php?page=$1
+
+#Вариант 2 (всё через index.php, кроме папки assets)
+RewriteCond %{REQUEST_URI} !^/assets/
+RewriteRule .* index.php
