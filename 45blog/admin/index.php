@@ -12,7 +12,7 @@ if (isset($_SESSION['auth']) AND $_SESSION['auth'] == TRUE) {
     }
 
     function showPageTable ($link) {
-        $query = "SELECT id, title, url FROM pagesj WHERE url!='404'";
+        $query = "SELECT id, title, url FROM blog WHERE url!='404'";
         $result = mysqli_query($link, $query) or die( mysqli_error($link) );
         //Преобразуем то, что отдала нам база в нормальный массив PHP $data:
         for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
@@ -39,12 +39,12 @@ if (isset($_SESSION['auth']) AND $_SESSION['auth'] == TRUE) {
     }
 
     function deletePage ($link, $id) {
-        $query = "SELECT * FROM pagesj WHERE id='$id'";
+        $query = "SELECT * FROM blog WHERE id='$id'";
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         $data = mysqli_fetch_assoc($result);
 
         if ($data) {
-            $query = "DELETE FROM pagesj WHERE id='$id'";
+            $query = "DELETE FROM blog WHERE id='$id'";
             $result = mysqli_query($link, $query) or die(mysqli_error($link));
 
             if($result) return true;

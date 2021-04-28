@@ -1,2 +1,6 @@
 #включаем механизам преобразований URL (относиться к mod_rewrite)
 RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/index.php
+RewriteRule ^(.*?)/?$ index.php?page=$1
